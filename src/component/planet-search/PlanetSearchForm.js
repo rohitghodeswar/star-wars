@@ -4,20 +4,28 @@ import Search from "./../search-form/Search";
 import SearchResults from "./../search-results/SearchResults";
 
 export default class PlanetSearchForm extends Component {
+  componentWillMount() {
+    window.addEventListener("load", this.routeToLogin);
+  }
+
   componentDidMount() {
     this.props.searchPlanets("");
   }
-
+  routeToLogin = () => {
+    this.props.history.push("/login");
+  };
   onSearchPlanets(text) {
     this.props.searchPlanets(text);
   }
-
+  componentWillUnmount() {
+    window.addEventListener("load", this.routeToLogin);
+  }
   onLogout() {
     this.props.history.push("/");
   }
 
   render() {
-    const { searchInfo, error, loginInfo } = this.props;
+    const { searchInfo, loginInfo } = this.props;
     return (
       <React.Fragment>
         <nav className="navbar navbar-dark bg-dark justify-content-between">
@@ -34,7 +42,10 @@ export default class PlanetSearchForm extends Component {
         </nav>
         <div className="container">
           <h2 className="mt-4">
-            Welcome <span className="text-warning">{loginInfo.login.name}</span>{" "}
+            Welcome{" "}
+            <span className="text-warning">
+              {loginInfo.login && loginInfo.login.name}
+            </span>{" "}
             to Star Wars Planet Collection
           </h2>
           <Search
@@ -42,10 +53,10 @@ export default class PlanetSearchForm extends Component {
           />
           {searchInfo &&
             searchInfo.results &&
-            searchInfo.results.length && (
+            searchInfo.results.length > 0 && (
               <SearchResults results={searchInfo.results} />
             )}
-          {error && !error.success && <p>{error.message}</p>}
+          {searchInfo && !searchInfo.success && <p>{searchInfo.message}</p>}
         </div>
       </React.Fragment>
     );

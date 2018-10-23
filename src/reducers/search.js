@@ -1,5 +1,5 @@
 import {
-  SEARCH_SUCCESS,
+  SEARCH_STATUS,
   SEARCH_ERROR,
   SEARCH_PERFORMED
 } from "./../actions/search";
@@ -15,12 +15,12 @@ export default (state = initialState, action) => {
         ...state,
         inProgress: action.searchTerm
       };
-    case SEARCH_SUCCESS:
+    case SEARCH_STATUS:
       return {
         ...state,
-        results: action.results
+        searchStatus: action.payload
       };
-      case SEARCH_ERROR:
+    case SEARCH_ERROR:
       return {
         ...state,
         error: action.error,

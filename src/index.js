@@ -9,17 +9,13 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import rootReducer from "./reducers";
 import { createLogger } from "redux-logger";
-import thunk from 'redux-thunk';
+import thunk from "redux-thunk";
 
 // components
 import LoginForm from "./component/login-form";
 import PlanetSearchForm from "./component/planet-search";
 
 const store = createStore(rootReducer, applyMiddleware(createLogger(), thunk));
-
-// window.setTimeout(() => {
-//   store.dispatch(searchSuccess(planets));
-// }, 2000);
 
 ReactDOM.render(
   <Provider store={store}>
