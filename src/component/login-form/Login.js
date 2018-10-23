@@ -37,7 +37,7 @@ class Login extends Component {
           <HeaderText text="STAR WARS" />
         </nav>
 
-        <form className="container login-form" style={{ width: "50%" }}>
+        <form className="container login-form">
           <div className="form-group">
             {isLogin && (
               <p className="text-danger">Username and Password is Incorrect</p>
